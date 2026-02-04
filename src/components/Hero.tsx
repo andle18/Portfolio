@@ -24,7 +24,7 @@ export default function Hero() {
 
           <div className="mt-8 flex gap-4">
             <a
-              href="/src/pages/ProjectsPages.tsx"
+              href="/projects"
               className="rounded-md bg-accent px-6 py-3 text-white font-semibold hover:opacity-90 transition"
             >
               View Projects
