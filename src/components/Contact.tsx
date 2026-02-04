@@ -8,7 +8,7 @@ export default function Contact() {
       className="bg-gradient-to-b from-secondary/80  via-secondary to-secondary py-15"
     >
       <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
-        {/* LEFT SIDE */}
+        {}
         <div className="relative px-6 pt-24 pb-20 sm:pt-32 lg:px-8 lg:py-48">
           <div className="mx-auto max-w-xl lg:mx-0">
             <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">
