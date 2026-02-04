@@ -1,126 +1,219 @@
 import { FaGithub } from "react-icons/fa";
 import { SiIndeed } from "react-icons/si";
+import { useState } from "react";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "../lib/firebase";
+
+type FormState = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  message: string;
+};
 
 export default function Contact() {
+  const [form, setForm] = useState<FormState>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    message: "",
+  });
+
+  const [errors, setErrors] = useState<Partial<FormState>>({});
+  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const newErrors: Partial<FormState> = {};
+
+    if (!form.firstName.trim()) newErrors.firstName = "First name is required";
+    if (!form.lastName.trim()) newErrors.lastName = "Last name is required";
+    if (!form.email.trim()) newErrors.email = "Email is required";
+    if (!form.message.trim()) newErrors.message = "Message is required";
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    setErrors({});
+    setLoading(true);
+
+    try {
+      await addDoc(collection(db, "contacts"), {
+        ...form,
+        createdAt: serverTimestamp(),
+      });
+
+      setSuccess(true);
+      setForm({
+        firstName: "",
+        lastName: "",
+        email: "",
+        message: "",
+      });
+
+      setTimeout(() => setSuccess(false), 4000);
+    } catch (error) {
+      console.error("Error sending message:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section
       id="contact"
-      className="bg-gradient-to-b from-secondary/80  via-secondary to-secondary py-15"
+      className="relative bg-gradient-to-b from-secondary via-secondary to-secondary py-28"
     >
+      {/* TOAST */}
+      {success && (
+        <div className="fixed top-6 right-6 z-50 rounded-lg bg-green-600 px-6 py-4 text-white shadow-lg">
+          ✅ Message sent successfully
+        </div>
+      )}
+
       <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
-        {}
-        <div className="relative px-6 pt-24 pb-20 sm:pt-32 lg:px-8 lg:py-48">
-          <div className="mx-auto max-w-xl lg:mx-0">
-            <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-              Let’s build something meaningful
-            </h2>
+        {/* LEFT */}
+        <div className="px-6 pt-24 pb-20 lg:px-8 lg:py-48">
+          <h2 className="text-4xl font-semibold sm:text-5xl">
+            Let’s build something meaningful
+          </h2>
 
-            <p className="mt-6 text-lg text-white/70">
-              I’m a frontend developer focused on clean UI, accessibility and
-              smooth user experiences. If you have an idea or a project, let’s
-              talk.
-            </p>
+          <p className="mt-6 text-lg text-white/70">
+            I’m a frontend developer focused on clean UI, accessibility and
+            smooth user experiences. If you have an idea or a project, let’s
+            talk.
+          </p>
 
-            {/* VISUAL BLOCK */}
-            <div className="relative mt-12 h-64 overflow-hidden rounded-2xl bg-gradient-to-br from-primary/40 via-support/30 to-accent/20 p-6">
-              <div className="absolute inset-0 rounded-2xl ring-1 ring-white/10" />
-
-              <div className="relative flex flex-wrap gap-4">
-                {[
-                  "React",
-                  "TypeScript",
-                  "Tailwind",
-                  "UX-first",
-                  "JavaScript",
-                  "React Router",
-                  "Firebase",
-                  "Next.js",
-                  "CSS3",
-                  "HTML5",
-                ].map((item) => (
-                  <div
-                    key={item}
-                    className="animate-float rounded-xl bg-secondary/80 px-10 py-2 text-sm font-medium text-white shadow backdrop-blur"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
+          {/* TAGS */}
+          <div className="mt-12 rounded-2xl bg-gradient-to-br from-primary/40 via-accent/20 to-support/30 p-6 ring-1 ring-white/10">
+            <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
+              {[
+                "React",
+                "TypeScript",
+                "JavaScript",
+                "Tailwind",
+                "UX-first",
+                "Firebase",
+                "React Router",
+                "Next.js",
+                "Zod",
+                "Zustand",
+              ].map((item) => (
+                <span
+                  key={item}
+                  className="animate-float rounded-lg bg-secondary px-4 py-2 text-xs sm:text-sm text-white"
+                >
+                  {item}
+                </span>
+              ))}
             </div>
+          </div>
 
-            {/* LINKS */}
-            <div className="mt-10 flex items-center gap-6 ">
-              <a
-                href="https://github.com/andle18"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                className="text-white/60 hover:text-support transition"
-              >
-                <FaGithub className="text-3xl" />
-              </a>
+          {/* ICONS */}
+          <div className="mt-10 flex gap-6">
+            <a
+              href="https://github.com/andle18"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/60 hover:text-white"
+            >
+              <FaGithub className="text-3xl" />
+            </a>
 
-              <a
-                href="https://www.indeed.com/cv/tu-cv"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Indeed"
-                className="text-white/60 hover:text-support transition"
-              >
-                <SiIndeed className="text-3xl" />
-              </a>
-            </div>
+            <a
+              href="https://www.indeed.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/60 hover:text-white"
+            >
+              <SiIndeed className="text-3xl" />
+            </a>
           </div>
         </div>
 
-        {/* RIGHT SIDE – FORM */}
-        <div className="px-6 pt-16 pb-24 sm:pb-32 lg:px-8 lg:py-32">
-          <div className="mx-auto max-w-xl lg:mr-0">
-            <form className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-              <div>
-                <label className="block text-sm font-semibold">
-                  First name
-                </label>
-                <input
-                  type="text"
-                  className="mt-2 block w-full rounded-md bg-secondary/70 px-3.5 py-2 text-white outline outline-1 outline-white/10 focus:outline-2 focus:outline-support"
-                />
-              </div>
+        {/* FORM */}
+        <div className="px-6 pt-16 pb-24 lg:px-8 lg:py-32">
+          <form
+            onSubmit={handleSubmit}
+            className="mx-auto max-w-xl grid grid-cols-1 gap-6 sm:grid-cols-2"
+          >
+            {/* FIRST NAME */}
+            <div>
+              <label className="text-slate-200 font-semibold">First name</label>
+              <input
+                name="firstName"
+                value={form.firstName}
+                onChange={handleChange}
+                className="mt-2 w-full rounded-md bg-secondary/70 px-3 py-2 text-white outline outline-1 outline-white/10 focus:outline-2 focus:outline-support"
+              />
+              {errors.firstName && (
+                <p className="mt-1 text-sm text-red-400">{errors.firstName}</p>
+              )}
+            </div>
 
-              <div>
-                <label className="block text-sm font-semibold">Last name</label>
-                <input
-                  type="text"
-                  className="mt-2 block w-full rounded-md bg-secondary/70 px-3.5 py-2 text-white outline outline-1 outline-white/10 focus:outline-2 focus:outline-support"
-                />
-              </div>
+            {/* LAST NAME */}
+            <div>
+              <label className="text-slate-200 font-semibold">Last name</label>
+              <input
+                name="lastName"
+                value={form.lastName}
+                onChange={handleChange}
+                className="mt-2 w-full rounded-md bg-secondary/70 px-3 py-2 text-white outline outline-1 outline-white/10 focus:outline-2 focus:outline-support"
+              />
+              {errors.lastName && (
+                <p className="mt-1 text-sm text-red-400">{errors.lastName}</p>
+              )}
+            </div>
 
-              <div className="sm:col-span-2">
-                <label className="block text-sm font-semibold">Email</label>
-                <input
-                  type="email"
-                  className="mt-2 block w-full rounded-md bg-secondary/70 px-3.5 py-2 text-white outline outline-1 outline-white/10 focus:outline-2 focus:outline-support"
-                />
-              </div>
+            {/* EMAIL */}
+            <div className="sm:col-span-2">
+              <label className="text-slate-200 font-semibold">Email</label>
+              <input
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                className="mt-2 w-full rounded-md bg-secondary/70 px-3 py-2 text-white outline outline-1 outline-white/10 focus:outline-2 focus:outline-support"
+              />
+              {errors.email && (
+                <p className="mt-1 text-sm text-red-400">{errors.email}</p>
+              )}
+            </div>
 
-              <div className="sm:col-span-2">
-                <label className="block text-sm font-semibold">Message</label>
-                <textarea
-                  rows={4}
-                  className="mt-2 block w-full rounded-md bg-secondary/70 px-3.5 py-2 text-white outline outline-1 outline-white/10 focus:outline-2 focus:outline-support"
-                />
-              </div>
+            {/* MESSAGE */}
+            <div className="sm:col-span-2">
+              <label className="text-slate-200 font-semibold">Message</label>
+              <textarea
+                name="message"
+                rows={4}
+                value={form.message}
+                onChange={handleChange}
+                className="mt-2 w-full rounded-md bg-secondary/70 px-3 py-2 text-white outline outline-1 outline-white/10 focus:outline-2 focus:outline-support"
+              />
+              {errors.message && (
+                <p className="mt-1 text-sm text-red-400">{errors.message}</p>
+              )}
+            </div>
 
-              <div className="sm:col-span-2 flex justify-end">
-                <button
-                  type="submit"
-                  className="rounded-md bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow hover:bg-accent/90 focus:outline-2 focus:outline-offset-2 focus:outline-accent"
-                >
-                  Let’s work together
-                </button>
-              </div>
-            </form>
-          </div>
+            <div className="sm:col-span-2 flex justify-end">
+              <button
+                type="submit"
+                disabled={loading}
+                className="rounded-md bg-accent px-6 py-2.5 font-semibold text-white hover:bg-accent/90 focus:outline-2 focus:outline-offset-2 focus:outline-accent disabled:opacity-50"
+              >
+                {loading ? "Sending..." : "Let’s work together"}
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </section>
