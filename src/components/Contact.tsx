@@ -1,5 +1,5 @@
 import { FaGithub } from "react-icons/fa";
-import { SiIndeed } from "react-icons/si";
+import { SiLinkedin } from "react-icons/si";
 import { useState } from "react";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../lib/firebase";
@@ -22,6 +22,7 @@ export default function Contact() {
   const [errors, setErrors] = useState<Partial<FormState>>({});
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -29,8 +30,8 @@ export default function Contact() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e?: React.SyntheticEvent) => {
+    e?.preventDefault();
 
     const newErrors: Partial<FormState> = {};
 
@@ -45,13 +46,19 @@ export default function Contact() {
     }
 
     setErrors({});
+    setSubmitError(null);
     setLoading(true);
 
     try {
-      await addDoc(collection(db, "contacts"), {
+      const savePromise = addDoc(collection(db, "contacts"), {
         ...form,
         createdAt: serverTimestamp(),
       });
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("Request timed out")), 10000),
+      );
+
+      await Promise.race([savePromise, timeoutPromise]);
 
       setSuccess(true);
       setForm({
@@ -64,6 +71,9 @@ export default function Contact() {
       setTimeout(() => setSuccess(false), 4000);
     } catch (error) {
       console.error("Error sending message:", error);
+      setSubmitError(
+        "No se pudo enviar. Revisa tus reglas de Firestore o tu conexión.",
+      );
     } finally {
       setLoading(false);
     }
@@ -78,6 +88,11 @@ export default function Contact() {
       {success && (
         <div className="fixed top-6 right-6 z-50 rounded-lg bg-green-600 px-6 py-4 text-white shadow-lg">
           ✅ Message sent successfully
+        </div>
+      )}
+      {submitError && (
+        <div className="fixed top-6 right-6 z-50 rounded-lg bg-red-600 px-6 py-4 text-white shadow-lg">
+          {submitError}
         </div>
       )}
 
@@ -97,18 +112,7 @@ export default function Contact() {
           {/* TAGS */}
           <div className="mt-12 rounded-2xl bg-gradient-to-br from-primary/40 via-accent/20 to-support/30 p-6 ring-1 ring-white/10">
             <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
-              {[
-                "React",
-                "TypeScript",
-                "JavaScript",
-                "Tailwind",
-                "UX-first",
-                "Firebase",
-                "React Router",
-                "Next.js",
-                "Zod",
-                "Zustand",
-              ].map((item) => (
+              {["Email me directly: andresgomes18@gmail.com"].map((item) => (
                 <span
                   key={item}
                   className="animate-float rounded-lg bg-secondary px-4 py-2 text-xs sm:text-sm text-white"
@@ -131,12 +135,12 @@ export default function Contact() {
             </a>
 
             <a
-              href="https://www.indeed.com"
+              href="https://www.linkedin.com/in/andres-gomes-7426723a9/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/60 hover:text-white"
             >
-              <SiIndeed className="text-3xl" />
+              <SiLinkedin className="text-3xl" />
             </a>
           </div>
         </div>
@@ -180,6 +184,7 @@ export default function Contact() {
               <label className="text-slate-200 font-semibold">Email</label>
               <input
                 name="email"
+                type="email"
                 value={form.email}
                 onChange={handleChange}
                 className="mt-2 w-full rounded-md bg-secondary/70 px-3 py-2 text-white outline outline-1 outline-white/10 focus:outline-2 focus:outline-support"
@@ -207,6 +212,7 @@ export default function Contact() {
             <div className="sm:col-span-2 flex justify-end">
               <button
                 type="submit"
+                onClick={handleSubmit}
                 disabled={loading}
                 className="rounded-md bg-accent px-6 py-2.5 font-semibold text-white hover:bg-accent/90 focus:outline-2 focus:outline-offset-2 focus:outline-accent disabled:opacity-50"
               >

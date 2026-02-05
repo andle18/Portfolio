@@ -7,6 +7,8 @@ import {
   SiTailwindcss,
   SiFirebase,
   SiNextdotjs,
+  SiZod,
+  SiGithub,
 } from "react-icons/si";
 import { TbRoute } from "react-icons/tb";
 
@@ -26,6 +28,8 @@ const skills: Skill[] = [
   { name: "Firebase", icon: SiFirebase },
   { name: "Next.js", icon: SiNextdotjs },
   { name: "CSS3", icon: SiCss3 },
+  { name: "Zod", icon: SiZod },
+  { name: "GitHub", icon: SiGithub },
 ];
 
 export default function Skills() {
