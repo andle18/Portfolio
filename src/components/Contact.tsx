@@ -111,11 +111,11 @@ export default function Contact() {
 
           {/* TAGS */}
           <div className="mt-12 rounded-2xl bg-gradient-to-br from-primary/40 via-accent/20 to-support/30 p-6 ring-1 ring-white/10">
-            <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
+            <div className="flex flex-wrap gap-3">
               {["Email me directly: andresgomes18@gmail.com"].map((item) => (
                 <span
                   key={item}
-                  className="animate-float rounded-lg bg-secondary px-4 py-2 text-xs sm:text-sm text-white"
+                  className="w-full animate-float break-words rounded-lg bg-secondary px-4 py-2 text-xs text-white sm:w-auto sm:text-sm"
                 >
                   {item}
                 </span>
