@@ -18,7 +18,7 @@ const projects = [
     description:
       "Web app that integrates a public API and AI to suggest cocktails based on user input.",
     image: "/Cocktail.jpg",
-    link: "https://drinks-api-ai.netlify.app/",
+    link: "https://drinks-ai-react.vercel.app/",
   },
 ];
 export default function ProjectsPreview() {
