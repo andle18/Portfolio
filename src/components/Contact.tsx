@@ -2,7 +2,8 @@ import { FaGithub } from "react-icons/fa";
 import { SiLinkedin } from "react-icons/si";
 import { useState } from "react";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "../lib/firebase";
+import { db, trackEvent } from "../lib/firebase";
+import { MdOutlineCameraFront } from "react-icons/md";
 
 type FormState = {
   firstName: string;
@@ -67,10 +68,12 @@ export default function Contact() {
         email: "",
         message: "",
       });
+      void trackEvent("contact_form_submit", { status: "success" });
 
       setTimeout(() => setSuccess(false), 4000);
     } catch (error) {
       console.error("Error sending message:", error);
+      void trackEvent("contact_form_submit", { status: "error" });
       setSubmitError(
         "No se pudo enviar. Revisa tus reglas de Firestore o tu conexión.",
       );
@@ -129,6 +132,12 @@ export default function Contact() {
               href="https://github.com/andle18"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() =>
+                void trackEvent("social_click", {
+                  platform: "github",
+                  source: "contact_section",
+                })
+              }
               className="text-white/60 hover:text-white"
             >
               <FaGithub className="text-3xl" />
@@ -138,9 +147,29 @@ export default function Contact() {
               href="https://www.linkedin.com/in/andres-gomes-7426723a9/"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() =>
+                void trackEvent("social_click", {
+                  platform: "linkedin",
+                  source: "contact_section",
+                })
+              }
               className="text-white/60 hover:text-white"
             >
               <SiLinkedin className="text-3xl" />
+            </a>
+            <a
+              href="https://personalphotography.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() =>
+                void trackEvent("social_click", {
+                  platform: "instagram",
+                  source: "contact_section",
+                })
+              }
+              className="text-white/60 hover:text-white"
+            >
+              <MdOutlineCameraFront className="text-3xl" />
             </a>
           </div>
         </div>
@@ -212,7 +241,6 @@ export default function Contact() {
             <div className="sm:col-span-2 flex justify-end">
               <button
                 type="submit"
-                onClick={handleSubmit}
                 disabled={loading}
                 className="rounded-md bg-accent px-6 py-2.5 font-semibold text-white hover:bg-accent/90 focus:outline-2 focus:outline-offset-2 focus:outline-accent disabled:opacity-50"
               >
