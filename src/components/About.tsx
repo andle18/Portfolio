@@ -133,7 +133,7 @@ export default function About() {
               <>
                 &nbsp;&nbsp;<span className="text-sage">role</span>
                 {": "}
-                <span className="text-accent/80">"Junior Frontend Dev"</span>,
+                <span className="text-accent/80">"Frontend Dev"</span>,
               </>,
               <>
                 &nbsp;&nbsp;<span className="text-sage">stack</span>
