@@ -143,7 +143,7 @@ export default function Contact() {
           </h2>
 
           <p className="mt-8 max-w-sm text-[0.95rem] leading-[1.85] text-white/45">
-            Open to junior positions, freelance projects, and interesting
+            Open to positions, freelance projects, and interesting
             collaborations. If you have an idea, let's talk.
           </p>
 
