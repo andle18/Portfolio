@@ -1,102 +1,228 @@
-# Andres Gomes — Frontend Portfolio
+# Andres Gomes - Online Resume
 
-Personal frontend portfolio focused on clean UI, responsiveness, accessibility, and real-world frontend practices.
-
-## Project Overview
-
-This project is my main portfolio as a junior frontend developer. It is built to present selected projects, highlight my core skills, and demonstrate clean, maintainable UI work.
+A modern, responsive portfolio website built with React, TypeScript, and Tailwind CSS. This project showcases frontend development skills through a clean, accessible user interface with smooth animations and integrated analytics.
 
 ## Features
 
-- Clean, consistent UI
-- Responsive layout for mobile and desktop
-- Smooth animations with Framer Motion
-- Accessible structure and semantics
-- Simple component-based architecture
+- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
+- **Smooth Animations**: Framer Motion for engaging user interactions
+- **Contact Form**: Firebase Firestore integration for message storage
+- **Analytics Integration**: Google Analytics 4 for tracking user behavior
+- **SEO Friendly**: Proper meta tags and semantic HTML structure
+- **Accessibility**: ARIA labels and keyboard navigation support
 
 ## Tech Stack
 
-- React
-- TypeScript
-- Tailwind CSS
-- Framer Motion
-- React Router
-- Vite
-- Firebase (basic integration)
+- **Frontend**: React 19, TypeScript, Tailwind CSS
+- **Routing**: React Router DOM
+- **Animations**: Framer Motion
+- **Backend**: Firebase (Firestore, Analytics)
+- **Build Tool**: Vite
+- **Deployment**: Vercel
 
-## Getting Started
+## Installation & Setup
 
-```bash
-npm install
-```
+1. **Clone the repository**
 
-```bash
-npm run dev
-```
+   ```bash
+   git clone https://github.com/yourusername/andresG-online-resume.git
+   cd andresG-online-resume
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Environment Setup**
+   - Copy `.env.example` to `.env`
+   - Fill in your Firebase configuration values:
+     ```env
+     VITE_API_KEY=your_api_key
+     VITE_AUTH_DOMAIN=your_project.firebaseapp.com
+     VITE_PROJECT_ID=your_project_id
+     VITE_STORAGE_BUCKET=your_project.appspot.com
+     VITE_MESSAGING_SENDER_ID=your_sender_id
+     VITE_APP_ID=your_app_id
+     VITE_MEASUREMENT_ID=G-XXXXXXXXXX
+     ```
+
+4. **Firebase Setup**
+   - Create a Firebase project at [console.firebase.google.com](https://console.firebase.google.com)
+   - Enable Firestore Database
+   - Add a web app and copy the config values
+   - Update Firestore security rules to allow contact form submissions
+
+5. **Run development server**
+   ```bash
+   npm run dev
+   ```
 
 ## Environment Variables
 
-Create a `.env` file at the project root with the following variables:
-
-```
-VITE_API_KEY=
-VITE_AUTH_DOMAIN=
-VITE_PROJECT_ID=
-VITE_STORAGE_BUCKET=
-VITE_MESSAGING_SENDER_ID=
-VITE_APP_ID=
-VITE_MEASUREMENT_ID=
-```
+| Variable                   | Description                     | Required |
+| -------------------------- | ------------------------------- | -------- |
+| `VITE_API_KEY`             | Firebase API Key                | Yes      |
+| `VITE_AUTH_DOMAIN`         | Firebase Auth Domain            | Yes      |
+| `VITE_PROJECT_ID`          | Firebase Project ID             | Yes      |
+| `VITE_STORAGE_BUCKET`      | Firebase Storage Bucket         | Yes      |
+| `VITE_MESSAGING_SENDER_ID` | Firebase Messaging Sender ID    | Yes      |
+| `VITE_APP_ID`              | Firebase App ID                 | Yes      |
+| `VITE_MEASUREMENT_ID`      | Google Analytics Measurement ID | Yes      |
 
 ## Scripts
 
-- `npm run dev` — start local dev server
-- `npm run build` — typecheck and build for production
-- `npm run preview` — preview the production build
-- `npm run lint` — run ESLint
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
 
 ## Project Structure
 
 ```
 src/
-	components/
-		About.tsx
-		Contact.tsx
-		Footer.tsx
-		Hero.tsx
-		Navbar.tsx
-		ProjectsPreview.tsx
-		Skills.tsx
-	lib/
-		firebase.ts
-	pages/
-		Home.tsx
-		ProjectsPages.tsx
-	App.tsx
-	main.tsx
+├── components/          # Reusable UI components
+│   ├── Hero.tsx        # Landing section
+│   ├── About.tsx       # About section
+│   ├── Skills.tsx      # Skills showcase
+│   ├── ProjectsPreview.tsx  # Featured projects
+│   ├── Contact.tsx     # Contact form
+│   ├── Navbar.tsx      # Navigation
+│   └── Footer.tsx      # Footer
+├── pages/              # Page components
+│   ├── Home.tsx        # Main page
+│   └── ProjectsPages.tsx  # Projects page
+├── lib/                # Utilities and configurations
+│   └── firebase.ts     # Firebase setup and analytics
+└── App.tsx             # Main app component
 ```
 
 ## Future Improvements
 
-- Extract project data into a JSON or CMS to avoid hardcoding
-- Add email format validation and better error handling in the contact form
-- Add a real API endpoint for contact submissions (server-side validation)
-- Add Lighthouse accessibility and performance checks
-
-## Live Demo
-
-https://your-live-demo-url.com
-
-## Contact
-
-- Email: andres@email.com
-- GitHub: https://github.com/andle18
+- Add unit and integration tests with Vitest
+- Implement dark mode toggle
+- Add internationalization (i18n) support
+- Create admin dashboard for managing contact messages
+- Add more detailed project case studies
+- Implement email notifications for new contacts
+- Add performance monitoring and error tracking
 
 ---
 
-# Andres Gomes — Frontend Portfolio (ES)
+# Andres Gomes - Portafolio Online
 
-Portafolio personal enfocado en UI limpia, responsividad, accesibilidad y buenas prácticas frontend.
+Un sitio web de portafolio moderno y responsivo construido con React, TypeScript y Tailwind CSS. Este proyecto muestra habilidades de desarrollo frontend a través de una interfaz de usuario limpia y accesible con animaciones suaves y análisis integrados.
+
+## Características
+
+- **Diseño Responsivo**: Optimizado para escritorio, tablet y dispositivos móviles
+- **Animaciones Suaves**: Framer Motion para interacciones de usuario atractivas
+- **Formulario de Contacto**: Integración con Firebase Firestore para almacenamiento de mensajes
+- **Integración de Analytics**: Google Analytics 4 para seguimiento del comportamiento del usuario
+- **Optimizado para SEO**: Etiquetas meta apropiadas y estructura HTML semántica
+- **Accesibilidad**: Etiquetas ARIA y navegación por teclado
+
+## Tecnologías
+
+- **Frontend**: React 19, TypeScript, Tailwind CSS
+- **Enrutamiento**: React Router DOM
+- **Animaciones**: Framer Motion
+- **Backend**: Firebase (Firestore, Analytics)
+- **Herramienta de Construcción**: Vite
+- **Despliegue**: Vercel
+
+## Instalación y Configuración
+
+1. **Clonar el repositorio**
+
+   ```bash
+   git clone https://github.com/yourusername/andresG-online-resume.git
+   cd andresG-online-resume
+   ```
+
+2. **Instalar dependencias**
+
+   ```bash
+   npm install
+   ```
+
+3. **Configuración del Entorno**
+   - Copiar `.env.example` a `.env`
+   - Completar los valores de configuración de Firebase:
+     ```env
+     VITE_API_KEY=your_api_key
+     VITE_AUTH_DOMAIN=your_project.firebaseapp.com
+     VITE_PROJECT_ID=your_project_id
+     VITE_STORAGE_BUCKET=your_project.appspot.com
+     VITE_MESSAGING_SENDER_ID=your_sender_id
+     VITE_APP_ID=your_app_id
+     VITE_MEASUREMENT_ID=G-XXXXXXXXXX
+     ```
+
+4. **Configuración de Firebase**
+   - Crear un proyecto Firebase en [console.firebase.google.com](https://console.firebase.google.com)
+   - Habilitar Firestore Database
+   - Agregar una aplicación web y copiar los valores de configuración
+   - Actualizar las reglas de seguridad de Firestore para permitir envíos del formulario de contacto
+
+5. **Ejecutar servidor de desarrollo**
+   ```bash
+   npm run dev
+   ```
+
+## Variables de Entorno
+
+| Variable                   | Descripción                              | Requerida |
+| -------------------------- | ---------------------------------------- | --------- |
+| `VITE_API_KEY`             | Clave API de Firebase                    | Sí        |
+| `VITE_AUTH_DOMAIN`         | Dominio de Auth de Firebase              | Sí        |
+| `VITE_PROJECT_ID`          | ID del Proyecto Firebase                 | Sí        |
+| `VITE_STORAGE_BUCKET`      | Bucket de Storage de Firebase            | Sí        |
+| `VITE_MESSAGING_SENDER_ID` | ID del Remitente de Mensajes de Firebase | Sí        |
+| `VITE_APP_ID`              | ID de la App de Firebase                 | Sí        |
+| `VITE_MEASUREMENT_ID`      | ID de Medición de Google Analytics       | Sí        |
+
+## Scripts
+
+- `npm run dev` - Iniciar servidor de desarrollo
+- `npm run build` - Construir para producción
+- `npm run preview` - Vista previa de la construcción de producción
+- `npm run lint` - Ejecutar ESLint
+
+## Estructura del Proyecto
+
+```
+src/
+├── components/          # Componentes UI reutilizables
+│   ├── Hero.tsx        # Sección de aterrizaje
+│   ├── About.tsx       # Sección Acerca de
+│   ├── Skills.tsx      # Muestra de habilidades
+│   ├── ProjectsPreview.tsx  # Proyectos destacados
+│   ├── Contact.tsx     # Formulario de contacto
+│   ├── Navbar.tsx      # Navegación
+│   └── Footer.tsx      # Pie de página
+├── pages/              # Componentes de página
+│   ├── Home.tsx        # Página principal
+│   └── ProjectsPages.tsx  # Página de proyectos
+├── lib/                # Utilidades y configuraciones
+│   └── firebase.ts     # Configuración de Firebase y analytics
+└── App.tsx             # Componente principal de la app
+```
+
+## Mejoras Futuras
+
+- Agregar pruebas unitarias e de integración con Vitest
+- Implementar alternancia de modo oscuro
+- Agregar soporte de internacionalización (i18n)
+- Crear panel de administración para gestionar mensajes de contacto
+- Agregar estudios de caso más detallados de proyectos
+- Implementar notificaciones por email para nuevos contactos
+- Agregar monitoreo de rendimiento y seguimiento de errores
+
+---
+
+Construido con ❤️ por Andres Gomes
 
 ## Descripción del Proyecto
 
