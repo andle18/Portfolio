@@ -4,7 +4,6 @@ import { trackEvent } from "../lib/firebase";
 export default function Hero() {
   return (
     <section className="relative overflow-x-hidden bg-ink pb-32 pt-36">
-      {/* Blobs — overflow controlado */}
       <div
         className="pointer-events-none absolute left-1/4 top-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary opacity-[0.07] lg:h-[600px] lg:w-[600px]"
         style={{ filter: "blur(140px)" }}
@@ -16,7 +15,7 @@ export default function Hero() {
 
       <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* TEXTO */}
+          {/* TEXT */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -39,13 +38,13 @@ export default function Hero() {
             </h1>
 
             <p className="mt-4 font-mono text-[0.72rem] uppercase tracking-[0.16em] text-white/35">
-              Junior Frontend Developer
+              Frontend Developer
             </p>
 
-            <p className="mt-8 max-w-md text-[0.93rem] leading-[1.9] text-white/45">
-              I build clean, accessible, and responsive user interfaces using
-              React, TypeScript, and Tailwind CSS. Focused on real user
-              experience, not just visuals.
+            <p className="mt-8 max-w-md text-[0.93rem] leading-[1.9] text-white/55">
+              Frontend Developer specializing in building scalable,
+              high-performance interfaces with React and TypeScript. My approach
+              goes beyond aesthetics
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
@@ -67,7 +66,7 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* IMAGEN */}
+          {/* IMAGE */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}

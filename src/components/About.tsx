@@ -83,21 +83,23 @@ export default function About() {
           transition={{ duration: 0.8, delay: 0.15 }}
         >
           <p className="text-[0.95rem] leading-[1.95] text-white/50">
-            I have completed hands-on training focused on modern frontend
-            development, working extensively with React and its ecosystem —
-            hooks, component-based architecture, and state management with
-            Zustand.
+            I specialize in building high-performance web applications using the
+            React ecosystem. My expertise lies in creating scalable component
+            architectures and managing complex application states with Zustand,
+            ensuring seamless data flow and maintainability.
           </p>
           <p className="mt-5 text-[0.95rem] leading-[1.95] text-white/50">
-            I use TypeScript to improve code quality and maintainability,
-            including schema validation with Zod. I'm fluent in handling server
-            data and API consumption using React Query, and client-side routing
-            with React Router.
+            Leveraging TypeScript and Zod, I implement rigorous schema
+            validation and type-safety across the entire development cycle. I am
+            proficient in optimizing server-state and API synchronization
+            through React Query, delivering fast and reliable user experiences.
           </p>
           <p className="mt-5 text-[0.95rem] leading-[1.95] text-white/50">
-            I've been introduced to Next.js for SSR/SSG patterns, and have
-            experience integrating Firebase for authentication and data storage.
-            I follow clean code practices focused on usability and performance.
+            I bridge the gap between design and backend logic by utilizing
+            Next.js for optimized rendering strategies (SSR/SSG) and integrating
+            cloud solutions like Firebase. My development process is driven by
+            clean code principles, accessibility (a11y), and a commitment to
+            measurable web performance.
           </p>
 
           {/* Code card */}
