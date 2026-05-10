@@ -222,7 +222,7 @@ src/
 
 ---
 
-Construido con ❤️ por Andres Gomes
+Construido con por Andres Gomes
 
 ## Descripción del Proyecto
 
