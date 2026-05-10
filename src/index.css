@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 @keyframes float {
   0% {
     transform: translateY(0);
@@ -12,6 +18,51 @@
   100% {
     transform: translateY(0);
   }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes scanLine {
+  0% {
+    width: 0%;
+    left: 0%;
+  }
+  50% {
+    width: 100%;
+    left: 0%;
+  }
+  100% {
+    width: 0%;
+    left: 100%;
+  }
+}
+.animate-scan {
+  animation: scanLine 2.5s ease infinite;
+}
+
+@keyframes blobDrift {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(40px, 60px) scale(1.08);
+  }
+}
+.animate-blob {
+  animation: blobDrift 18s ease-in-out infinite alternate;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.85s ease,
+    transform 0.85s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .animate-float {
