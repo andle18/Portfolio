@@ -39,7 +39,8 @@ export default function WelcomeScreen({
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.9, ease: "easeInOut" }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-ink"
+          style={{ backgroundColor: "#090909", height: "100dvh" }}
+          className="fixed top-0 left-0 w-screen z-[9999] flex items-center justify-center overflow-hidden"
         >
           {/* === FONDO AURORA === */}
           {/* Mancha dorada superior izquierda */}
