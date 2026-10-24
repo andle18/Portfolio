@@ -1,6 +1,9 @@
+import { ticketnova } from "../data/ticketnova";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const projects = [
+  ticketnova,
   {
     num: "01",
     title: "Order Management App",
@@ -71,12 +74,12 @@ export default function ProjectsPreview() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="hidden font-serif text-[5rem] font-black leading-none text-gold/10 lg:block"
           >
-            03
+            04
           </motion.span>
         </div>
 
         {/* Project rows */}
-        <div className="flex flex-col divide-y divide-white/[0.06] border-t border-white/[0.06]">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {projects.map((project, i) => (
             <motion.a
               key={project.title}
@@ -87,14 +90,25 @@ export default function ProjectsPreview() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: i * 0.1 }}
-              className="group relative grid grid-cols-1 gap-6 py-10 transition-all duration-500 hover:pl-6 lg:grid-cols-[80px_1fr_auto] lg:items-center lg:gap-12 lg:py-8"
+              className="group relative flex flex-col gap-5 overflow-hidden rounded-sm border border-white/[0.07] bg-white/[0.02] p-5 transition-colors duration-300 hover:border-gold/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold"
             >
               {/* Hover fill */}
               <div className="absolute inset-0 w-0 bg-white/[0.025] transition-all duration-500 group-hover:w-full" />
 
+              <div className="relative aspect-video overflow-hidden rounded-sm bg-ink">
+                <img
+                  src={project.image}
+                  alt={`${project.title} — application preview`}
+                  loading="lazy"
+                  width={1440}
+                  height={810}
+                  className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+
               {/* Number */}
               <span className="relative font-serif text-[0.75rem] italic text-white/30">
-                {project.num} /
+                {String(i + 1).padStart(2, "0")} /
               </span>
 
               {/* Info */}
@@ -114,7 +128,7 @@ export default function ProjectsPreview() {
               </div>
 
               {/* Tags */}
-              <div className="relative hidden flex-wrap justify-end gap-2 lg:flex">
+              <div className="relative mt-auto flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
@@ -126,7 +140,7 @@ export default function ProjectsPreview() {
               </div>
 
               {/* Arrow */}
-              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-lg text-gold opacity-0 transition-all duration-300 group-hover:opacity-100">
+              <span className="relative text-lg text-gold">
                 →
               </span>
             </motion.a>
@@ -141,12 +155,12 @@ export default function ProjectsPreview() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-16 flex justify-center"
         >
-          <a
-            href="/projects"
+          <Link
+            to="/projects"
             className="rounded-sm border border-white/[0.08] px-8 py-3.5 font-mono text-[0.78rem] uppercase tracking-[0.1em] text-white/50 transition-all duration-300 hover:border-gold/50 hover:text-gold"
           >
             View all projects →
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

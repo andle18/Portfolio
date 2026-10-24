@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 
 const stats = [
-  { num: "React", label: "Primary framework" },
-  { num: "TS", label: "Type-safe by default" },
-  { num: "12+", label: "Tools mastered" },
-  { num: "100%", label: "Commitment" },
+  { num: "React", label: "Frontend development" },
+  { num: "TypeScript", label: "Typed interfaces" },
+  { num: "Spanish", label: "Native" },
+  { num: "English", label: "Intermediate" },
 ];
 
 export default function About() {
@@ -56,7 +56,7 @@ export default function About() {
             {stats.map((s, i) => (
               <div
                 key={s.label}
-                className="p-6 transition-colors duration-300 hover:bg-white/[0.03]"
+                className="p-3 transition-colors duration-300 hover:bg-white/[0.03] sm:p-6"
                 style={{
                   borderRight:
                     i % 2 === 0 ? "1px solid rgba(255,255,255,0.06)" : "none",
@@ -64,7 +64,7 @@ export default function About() {
                     i < 2 ? "1px solid rgba(255,255,255,0.06)" : "none",
                 }}
               >
-                <div className="font-serif text-2xl font-black leading-none text-gold">
+                <div className="font-serif text-lg font-black leading-none text-gold sm:text-2xl">
                   {s.num}
                 </div>
                 <div className="mt-1.5 font-mono text-[0.68rem] uppercase tracking-[0.1em] text-white/40">
@@ -83,23 +83,21 @@ export default function About() {
           transition={{ duration: 0.8, delay: 0.15 }}
         >
           <p className="text-[0.95rem] leading-[1.95] text-white/50">
-            I specialize in building high-performance web applications using the
-            React ecosystem. My expertise lies in creating scalable component
-            architectures and managing complex application states with Zustand,
-            ensuring seamless data flow and maintainability.
+            I’m a frontend developer based in Spain with a degree in Computer
+            Engineering from Universidad Rafael Belloso Chacín. My background
+            includes product development and frontend consulting, building and
+            maintaining applications with React and TypeScript.
           </p>
           <p className="mt-5 text-[0.95rem] leading-[1.95] text-white/50">
-            Leveraging TypeScript and Zod, I implement rigorous schema
-            validation and type-safety across the entire development cycle. I am
-            proficient in optimizing server-state and API synchronization
-            through React Query, delivering fast and reliable user experiences.
+            I’ve worked on reusable components, API integration, and application
+            state management. My experience also includes automated testing with
+            Jest and Cypress, code reviews, and collaborating on releases.
           </p>
           <p className="mt-5 text-[0.95rem] leading-[1.95] text-white/50">
-            I bridge the gap between design and backend logic by utilizing
-            Next.js for optimized rendering strategies (SSR/SSG) and integrating
-            cloud solutions like Firebase. My development process is driven by
-            clean code principles, accessibility (a11y), and a commitment to
-            measurable web performance.
+            I’m currently looking for my next frontend opportunity. My projects
+            show how I approach interfaces, data, and integrations, including
+            applications built with React, Next.js, and Firebase. I speak native
+            Spanish and intermediate English.
           </p>
 
           {/* Code card */}
@@ -140,9 +138,9 @@ export default function About() {
                 {": ["}
                 <span className="text-accent/80">"React"</span>
                 {", "}
-                <span className="text-accent/80">"Node.js"</span>
+                <span className="text-accent/80">"TypeScript"</span>
                 {", "}
-                <span className="text-accent/80">"PostgreSQL"</span>
+                <span className="text-accent/80">"Tailwind CSS"</span>
                 {"],"},
               </>,
               <>

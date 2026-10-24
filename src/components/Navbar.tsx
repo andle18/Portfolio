@@ -4,10 +4,11 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, useLocation } from "react-router-dom";
 
 const navigation = [
-  { name: "About", href: "#about", external: false },
-  { name: "Skills", href: "#skills", external: false },
-  { name: "Projects", href: "/projects", external: true },
-  { name: "Contact", href: "#contact", external: false },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/#about" },
+  { name: "Skills", href: "/#skills" },
+  { name: "Projects", href: "/projects" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 function scrollToSection(id: string) {
@@ -24,27 +25,22 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    if (location.hash) {
-      const id = location.hash.replace("#", "");
-      setTimeout(() => scrollToSection(id), 100);
-    }
-  }, [location]);
-
-  function handleAnchorClick(
-    e: React.MouseEvent<HTMLAnchorElement>,
-    href: string,
-  ) {
-    e.preventDefault();
-    setMobileMenuOpen(false);
-    const id = href.replace("#", "");
-    // Pequeño delay para que el drawer cierre antes del scroll
-    setTimeout(() => scrollToSection(id), 50);
-  }
+    // Wait for the destination page to mount and the mobile drawer to unlock scrolling.
+    const timeout = window.setTimeout(() => {
+      if (location.hash) {
+        scrollToSection(location.hash.slice(1));
+      } else {
+        window.scrollTo({ top: 0, behavior: "instant" });
+      }
+    }, 100);
+    return () => window.clearTimeout(timeout);
+  }, [location.pathname, location.hash, location.key]);
 
   return (
     <header
@@ -65,26 +61,15 @@ export default function Navbar() {
 
         {/* Desktop links */}
         <div className="hidden items-center gap-10 md:flex">
-          {navigation.map((item) =>
-            item.external ? (
-              <Link
-                key={item.name}
-                to={item.href}
-                className="font-mono text-xs uppercase tracking-[0.14em] text-white/50 transition-colors duration-300 hover:text-white"
-              >
-                {item.name}
-              </Link>
-            ) : (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={(e) => handleAnchorClick(e, item.href)}
-                className="font-mono text-xs uppercase tracking-[0.14em] text-white/50 transition-colors duration-300 hover:text-white"
-              >
-                {item.name}
-              </a>
-            ),
-          )}
+          {navigation.map((item) => (
+            <Link
+              key={item.name}
+              to={item.href}
+              className="font-mono text-xs uppercase tracking-[0.14em] text-white/50 transition-colors duration-300 hover:text-white"
+            >
+              {item.name}
+            </Link>
+          ))}
         </div>
 
         {/* Hamburger */}
@@ -102,6 +87,7 @@ export default function Navbar() {
         open={mobileMenuOpen}
         onClose={setMobileMenuOpen}
         className="relative z-[100] md:hidden"
+        aria-label="Main navigation"
       >
         {/* Overlay */}
         <div
@@ -127,27 +113,16 @@ export default function Navbar() {
 
           {/* Nav links */}
           <div className="mt-12 flex flex-col gap-8">
-            {navigation.map((item) =>
-              item.external ? (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="font-mono text-sm uppercase tracking-[0.18em] text-white/50 transition-colors hover:text-gold"
-                >
-                  {item.name}
-                </Link>
-              ) : (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  onClick={(e) => handleAnchorClick(e, item.href)}
-                  className="font-mono text-sm uppercase tracking-[0.18em] text-white/50 transition-colors hover:text-gold"
-                >
-                  {item.name}
-                </a>
-              ),
-            )}
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="font-mono text-sm uppercase tracking-[0.18em] text-white/50 transition-colors hover:text-gold"
+              >
+                {item.name}
+              </Link>
+            ))}
           </div>
 
           {/* Footer del drawer */}

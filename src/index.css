@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+section[id] {
+  scroll-margin-top: 6rem;
+}
+
 html,
 body {
   overflow-x: hidden;

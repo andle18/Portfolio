@@ -1,28 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import WelcomeScreen from "./components/WelcomeScreen";
 import Home from "./pages/Home";
 import ProjectsPage from "./pages/ProjectsPages";
-import { trackPageView } from "./lib/firebase";
-
-function AnalyticsTracker() {
-  const location = useLocation();
-  const lastTrackedPath = useRef<string | null>(null);
-
-  useEffect(() => {
-    const path = `${location.pathname}${location.search}`;
-
-    if (lastTrackedPath.current === path) return;
-
-    lastTrackedPath.current = path;
-    void trackPageView(path);
-  }, [location.pathname, location.search]);
-
-  return null;
-}
 
 function App() {
   // Mostrar el splash solo una vez por sesión del navegador
@@ -40,7 +23,7 @@ function App() {
     <BrowserRouter>
       {showWelcome && <WelcomeScreen onFinish={handleWelcomeFinish} />}
 
-      <AnalyticsTracker />
+      {import.meta.env.PROD && <Analytics />}
       <Navbar />
 
       <Routes>

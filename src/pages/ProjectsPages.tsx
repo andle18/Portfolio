@@ -1,6 +1,9 @@
+import { ticketnova } from "../data/ticketnova";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const projects = [
+  ticketnova,
   {
     num: "01",
     title: "Crypto Tracker",
@@ -135,6 +138,7 @@ export default function ProjectsPages() {
                 <img
                   src={project.image}
                   alt={project.title}
+                  loading="lazy"
                   className="h-full w-full object-cover opacity-70 transition-all duration-700 group-hover:opacity-100 group-hover:scale-105"
                 />
               </div>
@@ -142,7 +146,7 @@ export default function ProjectsPages() {
               {/* Content */}
               <div className="flex flex-1 flex-col p-6">
                 <span className="font-serif text-[0.72rem] italic text-white/20">
-                  {project.num} /
+                  {String(i + 1).padStart(2, "0")} /
                 </span>
 
                 <h3
@@ -188,12 +192,12 @@ export default function ProjectsPages() {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="mt-16 flex justify-center"
         >
-          <a
-            href="/"
+          <Link
+            to="/"
             className="rounded-sm border border-white/[0.08] px-8 py-3.5 font-mono text-[0.78rem] uppercase tracking-[0.1em] text-white/50 transition-all duration-300 hover:border-gold/50 hover:text-gold"
           >
             ← Back to home
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

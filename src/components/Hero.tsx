@@ -1,5 +1,6 @@
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { trackEvent } from "../lib/firebase";
+import DownloadCV from "./DownloadCV";
 
 export default function Hero() {
   return (
@@ -14,7 +15,7 @@ export default function Hero() {
       />
 
       <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="max-w-3xl">
           {/* TEXT */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -27,7 +28,7 @@ export default function Hero() {
               transition={{ duration: 0.6 }}
               className="mb-5 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-gold"
             >
-              Available for work
+              Based in Spain · Open to frontend opportunities
             </motion.p>
 
             <h1
@@ -38,53 +39,29 @@ export default function Hero() {
             </h1>
 
             <p className="mt-4 font-mono text-[0.72rem] uppercase tracking-[0.16em] text-white/35">
-              Frontend Developer
+              Frontend Developer · React &amp; TypeScript
             </p>
 
             <p className="mt-8 max-w-md text-[0.93rem] leading-[1.9] text-white/55">
-              Frontend Developer specializing in building scalable,
-              high-performance interfaces with React and TypeScript. My approach
-              goes beyond aesthetics
+              I build and maintain web applications with React and TypeScript.
+              My experience includes reusable components, API integration, and
+              automated testing. I’m looking for my next frontend role.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
-              <a
-                href="/projects"
+              <Link
+                to="/projects"
                 className="rounded-sm bg-gold px-6 py-3 font-mono text-[0.75rem] font-medium uppercase tracking-[0.1em] text-ink transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110"
               >
                 View Projects →
-              </a>
+              </Link>
+              <DownloadCV />
               <a
                 href="#contact"
-                onClick={() =>
-                  void trackEvent("contact_cta_click", { source: "hero" })
-                }
                 className="rounded-sm border border-white/[0.08] px-6 py-3 font-mono text-[0.75rem] uppercase tracking-[0.1em] text-white/50 transition-all duration-300 hover:border-gold/50 hover:text-gold"
               >
                 Contact
               </a>
-            </div>
-          </motion.div>
-
-          {/* IMAGE */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.25, duration: 0.7 }}
-            className="flex justify-center lg:justify-end"
-          >
-            <div className="relative">
-              <div className="absolute -inset-[1px] rounded-sm bg-gradient-to-br from-gold/30 via-transparent to-gold/10" />
-              <img
-                src="/profile.jpg"
-                alt="Andres Gomes"
-                className="relative h-64 w-64 rounded-sm object-cover object-top opacity-90 sm:h-72 sm:w-72 lg:h-[22rem] lg:w-[22rem]"
-              />
-              <div className="absolute -bottom-4 left-0 right-0 flex justify-center">
-                <span className="rounded-sm border border-white/[0.07] bg-ink/80 px-4 py-1.5 font-mono text-[0.58rem] uppercase tracking-[0.14em] text-white/30 backdrop-blur-sm">
-                  Frontend Dev
-                </span>
-              </div>
             </div>
           </motion.div>
         </div>
