@@ -11,7 +11,7 @@ const projects = [
     description:
       "Next.js application that allows users to place orders and manage dynamic pricing through an interactive UI.",
     image: "/Menu.jpg",
-    link: "https://kioskly-orcin.vercel.app/order/cafe",
+    link: "https://kioskly-orcin.vercel.app/order/coffee",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
   },
   {

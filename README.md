@@ -26,7 +26,7 @@ Soy desarrollador frontend con formación en Ingeniería Informática y experien
 | Proyecto | Qué permite hacer | Demo |
 | --- | --- | --- |
 | **TicketNova** | Analizar tickets de supermercado con IA y recibir sugerencias personalizadas para la próxima compra. | [Abrir TicketNova](https://ticketnova-lyart.vercel.app/) |
-| **Order Management App** | Explorar un menú y preparar pedidos desde una interfaz construida con Next.js. | [Abrir aplicación](https://kioskly-orcin.vercel.app/order/cafe) |
+| **Order Management App** | Explorar un menú y preparar pedidos desde una interfaz construida con Next.js. | [Abrir aplicación](https://kioskly-orcin.vercel.app/order/coffee) |
 | **Task Manager** | Acceder a una aplicación de gestión de tareas con autenticación e integración con una API. | [Abrir aplicación](https://uptask-frontend-lyart.vercel.app/auth/login) |
 | **AI Cocktail Recommender** | Explorar bebidas y obtener sugerencias mediante una API e inteligencia artificial. | [Abrir aplicación](https://drinks-ai-react.vercel.app/) |
 
