@@ -1,40 +1,8 @@
-import { ticketnova } from "../data/ticketnova";
+import { featuredProjects } from "../data/projects";
+import ProjectLinks from "./ProjectLinks";
+import ProjectImage from "./ProjectImage";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-
-const projects = [
-  ticketnova,
-  {
-    num: "01",
-    title: "Order Management App",
-    subtitle: "Next.js",
-    description:
-      "Next.js application that allows users to place orders and manage dynamic pricing through an interactive UI.",
-    image: "/Menu.jpg",
-    link: "https://kioskly-orcin.vercel.app/order/coffee",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
-  },
-  {
-    num: "02",
-    title: "Task Manager",
-    subtitle: "Auth & React Query",
-    description:
-      "Full-stack task management app with user authentication, backend API, and efficient data fetching using React Query.",
-    image: "/Task.jpg",
-    link: "https://uptask-frontend-lyart.vercel.app/auth/login",
-    tags: ["React", "React Query", "Firebase"],
-  },
-  {
-    num: "03",
-    title: "AI Cocktail Recommender",
-    subtitle: "Public API + AI",
-    description:
-      "Web app that integrates a public API and AI to suggest cocktails based on user input.",
-    image: "/Cocktail.jpg",
-    link: "https://drinks-ai-react.vercel.app/",
-    tags: ["React", "TypeScript", "API"],
-  },
-];
 
 export default function ProjectsPreview() {
   return (
@@ -80,31 +48,19 @@ export default function ProjectsPreview() {
 
         {/* Project rows */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          {projects.map((project, i) => (
-            <motion.a
+          {featuredProjects.map((project, i) => (
+            <motion.article
               key={project.title}
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: i * 0.1 }}
-              className="group relative flex flex-col gap-5 overflow-hidden rounded-sm border border-white/[0.07] bg-white/[0.02] p-5 transition-colors duration-300 hover:border-gold/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold"
+              className="group relative flex flex-col gap-5 overflow-hidden rounded-sm border border-white/[0.07] bg-white/[0.02] p-5 transition-colors duration-300 hover:border-gold/40 focus-within:border-gold/40"
             >
               {/* Hover fill */}
               <div className="absolute inset-0 w-0 bg-white/[0.025] transition-all duration-500 group-hover:w-full" />
 
-              <div className="relative aspect-video overflow-hidden rounded-sm bg-ink">
-                <img
-                  src={project.image}
-                  alt={`${project.title} — application preview`}
-                  loading="lazy"
-                  width={1440}
-                  height={810}
-                  className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
+              <ProjectImage project={project} />
 
               {/* Number */}
               <span className="relative font-serif text-[0.75rem] italic text-white/30">
@@ -112,12 +68,20 @@ export default function ProjectsPreview() {
               </span>
 
               {/* Info */}
-              <div className="relative">
+              <div>
                 <h3
                   className="font-serif font-bold leading-tight tracking-[-0.02em] text-white transition-colors duration-300 group-hover:text-gold"
                   style={{ fontSize: "clamp(1.4rem, 2.5vw, 2rem)" }}
                 >
-                  {project.title}
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="after:absolute after:inset-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold"
+                    aria-label={`Open ${project.title} demo (opens in a new tab)`}
+                  >
+                    {project.title}
+                  </a>
                   <span className="ml-3 font-serif text-[0.65em] italic text-white/30">
                     — {project.subtitle}
                   </span>
@@ -139,11 +103,8 @@ export default function ProjectsPreview() {
                 ))}
               </div>
 
-              {/* Arrow */}
-              <span className="relative text-lg text-gold">
-                →
-              </span>
-            </motion.a>
+              <ProjectLinks project={project} />
+            </motion.article>
           ))}
         </div>
 

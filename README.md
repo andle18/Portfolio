@@ -14,7 +14,7 @@ Soy desarrollador frontend con formación en Ingeniería Informática y experien
 
 - Presentación profesional, sección About y habilidades agrupadas por categoría.
 - CV en PDF descargable desde la portada y Contacto, junto con teléfono de contacto para llamadas.
-- Cuatro proyectos destacados con capturas y acceso a sus demos.
+- Cuatro proyectos destacados con capturas, acceso a sus demos y botones de GitHub.
 - Una página `/projects` con ocho proyectos en total.
 - Navegación entre páginas y secciones, con menú móvil y compensación de la cabecera fija al desplazarse.
 - Formulario de contacto conectado a EmailJS, con estados de envío, éxito y error y contacto directo por email si falta la configuración.
@@ -27,10 +27,12 @@ Soy desarrollador frontend con formación en Ingeniería Informática y experien
 | --- | --- | --- |
 | **TicketNova** | Analizar tickets de supermercado con IA y recibir sugerencias personalizadas para la próxima compra. | [Abrir TicketNova](https://ticketnova-lyart.vercel.app/) |
 | **Order Management App** | Explorar un menú y preparar pedidos desde una interfaz construida con Next.js. | [Abrir aplicación](https://kioskly-orcin.vercel.app/order/coffee) |
-| **Task Manager** | Acceder a una aplicación de gestión de tareas con autenticación e integración con una API. | [Abrir aplicación](https://uptask-frontend-lyart.vercel.app/auth/login) |
+| **NexoBoard** | Gestionar proyectos y tareas con un tablero Kanban, colaboración y una demo para visitantes. | [Abrir aplicación](https://uptaskfrontend-sage.vercel.app/auth/login) |
 | **AI Cocktail Recommender** | Explorar bebidas y obtener sugerencias mediante una API e inteligencia artificial. | [Abrir aplicación](https://drinks-ai-react.vercel.app/) |
 
 El catálogo también incluye [Crypto Tracker](https://cryptotraker-react-zod-typescript.netlify.app/), [Calorie Tracker](https://calorie-traker.netlify.app/), [Expense Tracker](https://expense-tracker-gomes.netlify.app/) y [Weather Forecast](https://euphonious-licorice-2c760b.netlify.app/).
+
+NexoBoard sustituye al antiguo Task Manager e incluye capturas del tablero Kanban, los proyectos y el acceso. Su código está en [andle18/NexoBoard](https://github.com/andle18/NexoBoard); actualmente el repositorio es privado y requiere permiso para verlo.
 
 TicketNova integra la API de Claude de Anthropic. Esa integración pertenece a la aplicación enlazada: este repositorio contiene el portafolio que la presenta y no necesita una clave de IA para ejecutarse.
 
@@ -58,7 +60,7 @@ Las tecnologías de los proyectos del catálogo pueden ser distintas de las util
 - **Envío de contacto:** `src/lib/email.ts` reúne la configuración de EmailJS y el envío de los cuatro campos del formulario.
 - **Disponibilidad sin configuración:** si faltan los identificadores de EmailJS, el sitio sigue disponible y el contacto ofrece el enlace de correo mientras deshabilita el envío del formulario.
 - **Controles del formulario:** validación en el cliente, campo honeypot y limitación local de reintentos. Estos controles no equivalen a protección en el servidor.
-- **Datos compartidos de TicketNova:** su descripción, imagen y etiquetas se reutilizan en ambas vistas desde `src/data/ticketnova.ts`.
+- **Catálogo compartido:** `src/data/projects.ts` reúne los proyectos, demos y repositorios para ambas vistas. `ProjectLinks` presenta los enlaces y `ProjectImage` permite cambiar entre las tres capturas de NexoBoard.
 - **Recursos locales:** las capturas se sirven desde `public/`, con carga diferida en las tarjetas de proyectos.
 
 ```text
@@ -66,6 +68,7 @@ src/
 ├── components/             # Secciones de la portada y navegación compartida
 ├── data/
 │   ├── contact.ts         # Teléfono y ruta de descarga del CV
+│   ├── projects.ts         # Catálogo, repositorios y proyectos destacados
 │   └── ticketnova.ts       # Datos compartidos del proyecto TicketNova
 ├── lib/
 │   └── email.ts            # Configuración y envío con EmailJS
@@ -165,7 +168,7 @@ El CV se sirve desde `public/cv/Andres-Gomes-CV.pdf`. Para actualizarlo, sustitu
 
 ## Próximos pasos
 
-- Añadir repositorios y casos de estudio a las tarjetas: problema, contribución propia y decisiones técnicas.
+- Añadir casos de estudio a las tarjetas: problema, contribución propia y decisiones técnicas.
 - Completar metadatos y vista previa al compartir el portafolio.
 - Continuar la revisión de accesibilidad, contraste y preferencias de movimiento reducido.
 - Verificar el envío real de contacto, la recepción en bandeja de entrada y la configuración de protección de EmailJS.
