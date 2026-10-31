@@ -28,15 +28,10 @@ export const projects: Project[] = [
     subtitle: "Projects & Kanban",
     description:
       "Full-stack project management app with a Kanban board, team collaboration, Firebase authentication, and a visitor demo to explore without an account.",
-    image: "/nexoboard-kanban.jpg",
-    link: "https://uptaskfrontend-sage.vercel.app/auth/login",
+    image: "/nexoboard-demo.png",
+    link: "https://uptaskfrontend-6rgwejj87-andres-gomes-s-projects.vercel.app/demo",
     github: "https://github.com/andle18/NexoBoard",
     tags: ["React", "TypeScript", "React Query", "Firebase"],
-    screenshots: [
-      { image: "/nexoboard-kanban.jpg", label: "Kanban board" },
-      { image: "/nexoboard-projects.jpg", label: "Projects" },
-      { image: "/nexoboard-login.jpg", label: "Sign in" },
-    ],
   },
   {
     title: "AI Cocktail Recommender",
