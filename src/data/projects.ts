@@ -83,6 +83,16 @@ export const projects: Project[] = [
     link: "https://kioskly-orcin.vercel.app/order/coffee",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
   },
+  {
+    title: "Pokédex",
+    subtitle: "Game Boy Pokémon Explorer",
+    description:
+      "A Game Boy-inspired Pokémon explorer built with HTML, CSS, and JavaScript. Search by name or number, browse Pokémon, and explore their types, moves, and evolution chains using PokéAPI.",
+    image: "/pokedex.png",
+    link: "https://pokedex-nine-bice.vercel.app/",
+    github: "https://github.com/andle18/pokedex",
+    tags: ["JavaScript", "HTML", "CSS", "PokéAPI"],
+  },
 ];
 
 export const featuredProjects = [projects[0], projects[7], projects[2], projects[3]];
